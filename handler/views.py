@@ -13,17 +13,23 @@ def index(request):
 
 		if form.is_valid():
 			try:
-				myfile = FileDescriptor(rawfile = request.FILES['rawfile'])
+				myfile = FileDescriptor()
+
+				myfile.path = request.FILES['file']
+				myfile.description = form.cleaned_data['description']
+				myfile.tag = form.cleaned_data['tag']
+
 				myfile.save()
 
-				ret = {}
+				ret = {
+					'filename': myfile.path.name,
+					'url': myfile.path.url
+				}
 			except Exception, e:
-				print str(e)
-
-				ret = {}
+				ret = {'error': str(e)}
 		else:
-			ret = {}
+			ret = {'error': 'Form is incorrect'}
 	else:
-		ret = {}
+		ret = {'error': 'Unsupported method'}
 
 	return HttpResponse(simplejson.dumps(ret), mimetype='application/json')
