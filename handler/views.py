@@ -7,26 +7,23 @@ from handler.forms import FileDescriptorForm
 from handler.models import FileDescriptor
 
 @csrf_exempt
-def add(request):
+def index(request):
 	if request.method == 'POST':
 		form = FileDescriptorForm(request.POST, request.FILES)
 
 		if form.is_valid():
-			myfile = FileDescriptor(rawfile = request.FILES['rawfile'])
-			myfile.save()
+			try:
+				myfile = FileDescriptor(rawfile = request.FILES['rawfile'])
+				myfile.save()
 
-			ret = {}
+				ret = {}
+			except Exception, e:
+				print str(e)
+
+				ret = {}
 		else:
 			ret = {}
 	else:
 		ret = {}
-
-	return HttpResponse(simplejson.dumps(ret), mimetype='application/json')
-
-def urls(request):
-	ret = {
-		'index': reverse('handler_home'),
-		'add': reverse('handler_add')
-	}
 
 	return HttpResponse(simplejson.dumps(ret), mimetype='application/json')
