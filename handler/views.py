@@ -19,10 +19,12 @@ def index(request):
 				myfile.description = form.cleaned_data['description']
 				myfile.tag = form.cleaned_data['tag']
 
+				fname = myfile.path.name
+
 				myfile.save()
 
 				ret = {
-					'filename': myfile.path.name,
+					'filename': fname,
 					'url': myfile.path.url
 				}
 			except Exception, e:
