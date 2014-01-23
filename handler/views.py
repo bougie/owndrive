@@ -16,17 +16,22 @@ def index(request):
 				myfile = FileDescriptor()
 
 				myfile.path = request.FILES['file']
+				myfile.type = request.FILES['file'].content_type
 				myfile.description = form.cleaned_data['description']
 				myfile.tag = form.cleaned_data['tag']
 
 				fname = myfile.path.name
 
-				myfile.save()
+				allowed_mime = set(['image/jpeg', 'image/png', 'image/gif'])
+				if myfile.type in allowed_mime:
+					myfile.save()
 
-				ret = {
-					'filename': fname,
-					'url': myfile.path.url
-				}
+					ret = {
+						'filename': fname,
+						'url': myfile.path.url
+					}
+				else:
+					return {'error': 'format %s of file is not allowed' % (myfile.type)}
 			except Exception, e:
 				ret = {'error': str(e)}
 		else:
