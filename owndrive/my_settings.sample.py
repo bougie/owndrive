@@ -9,3 +9,9 @@ DATABASES = {
 		'PORT': '',
 	}
 }
+
+MEDIA_ROOT = ''
+MEDIA_URL = ''
+
+# Tuple for the thumbnail size (width, height)
+THUMB_SIZE = ()

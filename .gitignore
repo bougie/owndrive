@@ -1,3 +1,5 @@
 *.pyc
 *.DS_Store
 db.sqlite
+media
+owndrive/my_settings.py

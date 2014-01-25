@@ -10,5 +10,8 @@ DATABASES = {
 	}
 }
 
-MEDIA_ROOT = '/tmp'
+import os
+MEDIA_ROOT = os.path.join(os.getcwd(), 'media')
 MEDIA_URL = '/media/'
+
+THUMB_SIZE = (125, 125)

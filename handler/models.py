@@ -5,3 +5,4 @@ class FileDescriptor(models.Model):
 	description = models.CharField(max_length=255, blank=True, null=True)
 	tag = models.CharField(max_length=255, blank=True, null=True)
 	type = models.CharField(max_length=30, blank=True, null=True)
+	thumbnail = models.CharField(max_length=255, blank=True, null=True)
