@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = patterns('',
-	(r'upload/', include('handler.urls')),
+	(r'pic/', include('pichandler.urls')),
 )
 
 urlpatterns += staticfiles_urlpatterns()
