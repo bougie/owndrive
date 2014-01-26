@@ -58,9 +58,11 @@ def index(request):
 					myfile.save()
 
 					ret = {
-						'filename': fname,
+						'name': fname,
+						'description': myfile.description.
+						'tag': myfile.tag,
 						'thumbnail': thumbpath,
-						'url': myfile.path.name
+						'image': myfile.path.name
 					}
 				else:
 					return {'error': 'format %s of file is not allowed' % (myfile.type)}
