@@ -13,7 +13,20 @@ from pichandler.lib.thumbnail import generate
 @csrf_exempt
 def index(request):
 	if request.method == 'GET':
-		pass
+		_pictures = FileDescriptor.objects.all()
+		
+		pictures = []
+		for pict in _pictures:
+			pictures.append({
+				'name': pict.name,
+				'description': pict.description,
+				'tag': pict.tag,
+				'image': pict.path.name,
+				'thumbnail': pict.thumbnail
+			})
+
+		ret = {'content': pictures} 
+
 	elif request.method == 'POST':
 		form = FileDescriptorForm(request.POST, request.FILES)
 
@@ -22,6 +35,7 @@ def index(request):
 				myfile = FileDescriptor()
 
 				myfile.path = request.FILES['file']
+				myfile.name = myfile.path.name
 				myfile.type = request.FILES['file'].content_type
 				myfile.description = form.cleaned_data['description']
 				myfile.tag = form.cleaned_data['tag']
