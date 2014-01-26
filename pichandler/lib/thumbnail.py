@@ -17,11 +17,12 @@ def generate(base, size, rootdir):
 	# Generate thumbnail path
 	# Add _min before the file extension
 	thumbpath = imgpath.split('.')
+	path_size_arg = "_min_%sx%s" % (thumb_w, thumb_h)
 	thumbpath_len = len(thumbpath) - 1
 	if thumbpath_len == 1:
-		thumbpath = str(thumbpath[0]) + '_min.' + str(thumbpath[thumbpath_len])
+		thumbpath = str(thumbpath[0]) + path_size_arg + '.' + str(thumbpath[thumbpath_len])
 	else:
-		thumbpath = str(thumbpath[0:thumbpath_len - 1]) + '_min.' + str(thumbpath[thumbpath_len])
+		thumbpath = str(thumbpath[0:thumbpath_len - 1]) + path_size_arg + '.' + str(thumbpath[thumbpath_len])
 
 	# Convert to RGB if necessary
 	image = Image.open(os.path.join(rootdir, imgpath))
